@@ -3,7 +3,7 @@ MazeGenerators
 
 Compiling:
 
-   mkdir build
-   cd build
-   qmake ..
-   make
+    mkdir build
+    cd build
+    qmake ..
+    make
