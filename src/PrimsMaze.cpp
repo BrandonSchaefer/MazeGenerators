@@ -91,3 +91,8 @@ void PrimsMaze::Generate()
 
   }
 }
+
+string PrimsMaze::GetName() const
+{
+  return "PrimsMaze";
+}

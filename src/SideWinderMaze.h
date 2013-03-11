@@ -25,7 +25,9 @@ class SideWinderMaze : public Maze
 {
 public:
   SideWinderMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 
 private:
 

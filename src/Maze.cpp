@@ -62,16 +62,6 @@ void Maze::OpenPassage(Point p, Cell::Direction dir)
   Get(p.Direction(dir)).AddDirection(OppositeDirection(dir));
 }
 
-void Maze::SetStart(Point start)
-{
-  start_ = start;
-}
-
-void Maze::SetFinish(Point finish)
-{
-  finish_ = finish;
-}
-
 bool Maze::IsStart(Point& p) const
 {
   return p == start_;

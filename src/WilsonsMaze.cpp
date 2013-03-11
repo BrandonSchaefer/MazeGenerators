@@ -80,3 +80,8 @@ void WilsonsMaze::Generate()
     }
   }
 }
+
+string WilsonsMaze::GetName() const
+{
+  return "WilsonsMaze";
+}

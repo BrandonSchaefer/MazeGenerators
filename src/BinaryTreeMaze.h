@@ -25,7 +25,9 @@ class BinaryTreeMaze : public Maze
 {
 public:
   BinaryTreeMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 };
 
 #endif // BINARYTREEMAZE

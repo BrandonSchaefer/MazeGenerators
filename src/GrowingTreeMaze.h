@@ -26,11 +26,13 @@ class GrowingTreeMaze : public Maze
 {
 public:
   GrowingTreeMaze(int x, int y);
-  void Generate();
 
-  std::pair<Point, Cell::Direction> GetValidNeighbour(std::vector<Point>& open_neighbours);
+  void Generate();
+  std::string GetName() const;
 
 private:
+  std::pair<Point, Cell::Direction> GetValidNeighbour(std::vector<Point>& open_neighbours);
+
   Marked marked_;
 
 };

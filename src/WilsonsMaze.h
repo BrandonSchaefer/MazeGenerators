@@ -25,7 +25,9 @@ class WilsonsMaze : public Maze
 {
 public:
   WilsonsMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 };
 
 #endif // WILSONSMAZE

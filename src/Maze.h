@@ -22,6 +22,7 @@
 #include "Cell.h"
 #include "Point.h"
 
+#include <string>
 #include <vector>
 
 class Maze
@@ -36,8 +37,6 @@ public:
 
   void OpenPassage(Point p, Cell::Direction dir);
 
-  void SetStart(Point start);
-  void SetFinish(Point finish);
   bool IsStart(Point& p) const;
   bool IsFinish(Point& p) const;
   Point GetStart();
@@ -58,6 +57,7 @@ public:
   Cell::Direction OppositeDirection(Cell::Direction dir);
 
   virtual void Generate() = 0;
+  virtual std::string GetName() const = 0;
 
 protected:
   std::vector<std::vector<Cell> > maze_;

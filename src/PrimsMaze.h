@@ -25,7 +25,9 @@ class PrimsMaze : public Maze
 {
 public:
   PrimsMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 
 private:
   Cell::Direction GetOppositeParentsDirection(Point& current);

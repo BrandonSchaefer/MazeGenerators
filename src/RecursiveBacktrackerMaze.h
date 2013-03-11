@@ -26,7 +26,9 @@ class RecursiveBacktrackerMaze : public Maze
 {
 public:
   RecursiveBacktrackerMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 
 private:
   std::vector<std::pair<Point, Cell::Direction> > GetUnMarkedNeighbours(Point& current);

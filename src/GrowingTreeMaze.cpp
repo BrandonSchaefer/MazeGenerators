@@ -92,3 +92,8 @@ void GrowingTreeMaze::Generate()
 
   } while (!open_neighbours.empty());
 }
+
+string GrowingTreeMaze::GetName() const
+{
+  return "GrowingTreeMaze";
+}

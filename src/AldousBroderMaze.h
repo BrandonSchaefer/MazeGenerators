@@ -25,7 +25,9 @@ class AldousBroderMaze : public Maze
 {
 public:
   AldousBroderMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 };
 
 #endif // ALDOUSBRODERMAZE

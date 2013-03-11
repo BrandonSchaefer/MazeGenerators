@@ -26,7 +26,9 @@ class HuntAndKillMaze : public Maze
 {
 public:
   HuntAndKillMaze(int x, int y);
+
   void Generate();
+  std::string GetName() const;
 
 private:
   bool HasOpenNeighbours(Point& current);

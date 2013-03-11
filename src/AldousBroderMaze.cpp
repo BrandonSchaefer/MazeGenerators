@@ -50,3 +50,8 @@ void AldousBroderMaze::Generate()
     }
   }
 }
+
+string AldousBroderMaze::GetName() const
+{
+  return "AldousBroderMaze";
+}

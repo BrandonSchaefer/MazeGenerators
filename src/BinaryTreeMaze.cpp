@@ -20,6 +20,8 @@
 
 #include <stdlib.h>
 
+using namespace std;
+
 BinaryTreeMaze::BinaryTreeMaze(int x, int y)
   : Maze(x,y)
 {}
@@ -53,4 +55,9 @@ void BinaryTreeMaze::Generate()
       //PrintMaze();
     }
   }
+}
+
+string BinaryTreeMaze::GetName() const
+{
+  return "BinaryTreeMaze";
 }

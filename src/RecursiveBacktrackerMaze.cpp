@@ -76,3 +76,8 @@ vector<pair<Point, Cell::Direction> > RecursiveBacktrackerMaze::GetUnMarkedNeigh
 
   return neighbours;
 }
+
+string RecursiveBacktrackerMaze::GetName() const
+{
+  return "RecursiveBacktrackerMaze";
+}

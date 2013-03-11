@@ -62,3 +62,8 @@ void SideWinderMaze::Generate()
     }
   }
 }
+
+string SideWinderMaze::GetName() const
+{
+  return "SideWinderMaze";
+}
