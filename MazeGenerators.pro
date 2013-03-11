@@ -27,7 +27,6 @@ SOURCES += src/AldousBroderMaze.cpp \
            src/Cell.cpp \
            src/GrowingTreeMaze.cpp \
            src/HuntAndKillMaze.cpp \
-           src/main.cpp \
            src/Marked.cpp \
            src/Maze.cpp \
            src/Point.cpp \
@@ -35,4 +34,5 @@ SOURCES += src/AldousBroderMaze.cpp \
            src/RecursiveBacktrackerMaze.cpp \
            src/SideWinderMaze.cpp \
            src/Solver.cpp \
-           src/WilsonsMaze.cpp
+           src/WilsonsMaze.cpp \
+           tests/main.cpp

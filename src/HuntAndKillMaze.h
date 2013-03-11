@@ -32,11 +32,10 @@ public:
 
 private:
   bool HasOpenNeighbours(Point& current);
-  Point FindNextUnMarkedCell();
+  Point FindNextUnMarkedCell(Point const& current);
   Cell::Direction GetUnMarkedRandomDirection(Point& current);
 
   Marked marked_;
-  int last_row_;
 };
 
 #endif // HUNTANDKILLMAZE

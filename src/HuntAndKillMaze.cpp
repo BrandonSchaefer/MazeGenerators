@@ -25,7 +25,6 @@ using namespace std;
 HuntAndKillMaze::HuntAndKillMaze(int x, int y)
   : Maze(x,y)
   , marked_(Columns(), Rows())
-  , last_row_(1)
 {}
 
 bool HuntAndKillMaze::HasOpenNeighbours(Point& current)
@@ -46,13 +45,10 @@ void HuntAndKillMaze::Generate()
 {
   Cell::Direction random_dir;
   Point last_used_index(1,1);
+  marked_.Mark(start_);
   Point current;
 
-  int cells_left = Columns() * Rows() - 1;
-
-  marked_.Mark(start_);
-
-  while (cells_left > 0)
+  while (last_used_index.x() != -1)
   {
     current = last_used_index;
 
@@ -63,20 +59,17 @@ void HuntAndKillMaze::Generate()
 
       marked_.Mark(current);
       current = current.Direction(random_dir);
-      cells_left--;
-      //PrintMaze();
     }
 
-    last_used_index = FindNextUnMarkedCell();
-    cells_left--;
+    last_used_index = FindNextUnMarkedCell(last_used_index);
   }
 }
 
-Point HuntAndKillMaze::FindNextUnMarkedCell()
+Point HuntAndKillMaze::FindNextUnMarkedCell(Point const& current)
 {
-  for (int i = last_row_; i <= Columns()-2; i++)
+  for (int i = current.x(); i < Columns()-1; i++)
   {
-    for (int j = 1; j <= Rows()-2; j++)
+    for (int j = 1; j < Rows()-1; j++)
     {
       for (auto d : directions_)
       {
@@ -88,7 +81,6 @@ Point HuntAndKillMaze::FindNextUnMarkedCell()
           OpenPassage(p, d);
           marked_.Mark(p);
 
-          last_row_ = i;
           return p;
         }
       }
