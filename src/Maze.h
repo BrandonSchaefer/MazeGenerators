@@ -36,6 +36,7 @@ public:
   int Rows() const;
 
   void OpenPassage(Point p, Cell::Direction dir);
+  void SetWall(Point p, Cell::Direction dir);
 
   bool IsStart(Point& p) const;
   bool IsFinish(Point& p) const;

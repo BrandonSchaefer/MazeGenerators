@@ -5,7 +5,8 @@
 TEMPLATE = app
 TARGET = MazeGenerators
 INCLUDEPATH += . src
-QMAKE_CXX += -g3 -std=c++0x
+QMAKE_CXX += -g3 -O0 -Wall -W -std=c++0x
+QT += widgets gui core printsupport
 
 # Input
 HEADERS += src/AldousBroderMaze.h \
@@ -20,7 +21,10 @@ HEADERS += src/AldousBroderMaze.h \
            src/RecursiveBacktrackerMaze.h \
            src/SideWinderMaze.h \
            src/Solver.h \
-           src/WilsonsMaze.h
+           src/WilsonsMaze.h \
+           ui/CellItem.h \
+           ui/GridWindow.h \
+           ui/View.h \
 
 SOURCES += src/AldousBroderMaze.cpp \
            src/BinaryTreeMaze.cpp \
@@ -35,4 +39,8 @@ SOURCES += src/AldousBroderMaze.cpp \
            src/SideWinderMaze.cpp \
            src/Solver.cpp \
            src/WilsonsMaze.cpp \
-           tests/main.cpp
+           ui/CellItem.cpp \
+           ui/GridWindow.cpp \
+           ui/View.cpp \
+           ui/main.cpp \
+           #tests/main.cpp

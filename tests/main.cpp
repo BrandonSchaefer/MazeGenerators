@@ -36,8 +36,8 @@
 
 using namespace std;
 
-int const X = 500;
-int const Y = 500;
+int const X = 40;
+int const Y = 80;
 
 void time_maze(Maze& maze)
 {
