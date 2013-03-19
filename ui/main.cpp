@@ -20,7 +20,6 @@
 #include "BinaryTreeMaze.h"
 #include "GrowingTreeMaze.h"
 #include "HuntAndKillMaze.h"
-#include "RecursiveDivisionMaze.h"
 #include "RecursiveBacktrackerMaze.h"
 #include "PrimsMaze.h"
 #include "SideWinderMaze.h"
@@ -68,9 +67,6 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
 
   srand(time(NULL));
-
-  RecursiveBacktrackerMaze rmaze(X, Y);
-  time_maze(rmaze);
 
   ui::GridWindow win;
   win.show();

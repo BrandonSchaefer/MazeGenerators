@@ -56,6 +56,7 @@ void PrimsMaze::Generate()
   Point current((Columns()-2)/2, (Rows()-2)/2);
   Get(current).SetParent(&Get(start));
   marked.Mark(current);
+  OpenPassage(current, Cell::Direction::RIGHT);
   walls.push_back(current.Right());
 
   while (!walls.empty())
@@ -88,7 +89,6 @@ void PrimsMaze::Generate()
         walls[walls.size()-1] = tmp;
       }
     }
-
   }
 }
 
