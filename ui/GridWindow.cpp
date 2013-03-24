@@ -22,6 +22,7 @@
 #include "GridWindow.h"
 
 #include "PrimsMaze.h"
+#include "RecursiveBacktrackerMaze.h"
 #include "Solver.h"
 
 int const WIDTH = 640;
@@ -54,11 +55,10 @@ void GridWindow::GenerateMaze()
   cell_views_ = vector<vector<CellItem::Ptr> >(h_l, vector<CellItem::Ptr>(w_l, CellItem::Ptr()));
   view_->view()->centerOn(QPointF(0,0));
 
-  PrimsMaze rmaze(w_l, h_l);
-  rmaze.Generate();
+  Maze::Ptr maze = view_->GetGeneratedMaze(w_l, h_l);
 
   Solver s;
-  solved_path_ = s.DFSolve(rmaze);
+  solved_path_ = s.DFSolve(*maze);
 
   for (int i = 0; i < h_l; i++)
   {
@@ -67,15 +67,15 @@ void GridWindow::GenerateMaze()
       Point p(j+1, i+1);
       CellItem::Ptr item = make_shared<CellItem>(CELL_SIZE);
       item->setPos(i * CELL_SIZE, j * CELL_SIZE);
-      item->SetCell(rmaze.Get(p));
+      item->SetCell(maze->Get(p));
 
       cell_views_[i][j] = item;
       scene_->addItem(item.get());
     }
   }
 
-  Point start = rmaze.GetStart();
-  Point finish = rmaze.GetFinish();
+  Point start  = maze->GetStart();
+  Point finish = maze->GetFinish();
 
   cell_views_[start.y()-1][start.x()-1]->SetStart();
   cell_views_[start.y()-1][start.x()-1]->Mark();

@@ -16,6 +16,7 @@ HEADERS += src/AldousBroderMaze.h \
            src/HuntAndKillMaze.h \
            src/Marked.h \
            src/Maze.h \
+           src/MazeFactory.h \
            src/Point.h \
            src/PrimsMaze.h \
            src/RecursiveBacktrackerMaze.h \
@@ -33,6 +34,7 @@ SOURCES += src/AldousBroderMaze.cpp \
            src/HuntAndKillMaze.cpp \
            src/Marked.cpp \
            src/Maze.cpp \
+           src/MazeFactory.cpp \
            src/Point.cpp \
            src/PrimsMaze.cpp \
            src/RecursiveBacktrackerMaze.cpp \

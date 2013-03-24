@@ -22,7 +22,11 @@
 #include <QFrame>
 #include <QGraphicsView>
 #include <QGridLayout>
+#include <QMenuBar>
 #include <QSlider>
+
+#include "Maze.h"
+#include "MazeFactory.h"
 
 #include <memory>
 
@@ -37,23 +41,43 @@ public:
 
   View(QWidget* parent = 0);
 
+  Maze::Ptr GetGeneratedMaze(int width, int height);
+
   View::Ptr view() const;
 
 private slots:
   void SetupMatrix();
 
+  void aldBrod();
+  void binTree();
+  void growTree();
+  void huntKill();
+  void prims();
+  void sideWind();
+  void recBack();
+  void wilsons();
+
 private:
+  void SetupMenuBar();
   void SetupZoomLayout();
   void SetupGridLayout();
   void SetupSignals();
+
+  void UpdateMazeMenuTitle();
+
+  QWidget* parent_;
 
   std::shared_ptr<QGraphicsView> graphics_view_;
 
   std::unique_ptr<QVBoxLayout> zoom_layout_;
   std::unique_ptr<QSlider> zoom_slider_;
+  std::unique_ptr<QMenuBar> menu_bar_;
 
-  // setLayout() takes ownership of this pointer
   QGridLayout* grid_layout_;
+  QMenu* maze_menu_;
+
+  MazeFactory maze_factory_;
+  MazeType current_maze_type_;
 };
 
 } // namespace ui

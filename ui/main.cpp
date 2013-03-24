@@ -70,6 +70,7 @@ int main(int argc, char* argv[])
 
   ui::GridWindow win;
   win.show();
+  //win.showFullScreen();
 
   return app.exec();
 }
