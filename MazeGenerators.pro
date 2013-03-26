@@ -25,6 +25,8 @@ HEADERS += src/AldousBroderMaze.h \
            src/WilsonsMaze.h \
            ui/CellItem.h \
            ui/GridWindow.h \
+           ui/MazeMenuBar.h \
+           ui/MazeView.h \
            ui/View.h \
 
 SOURCES += src/AldousBroderMaze.cpp \
@@ -43,6 +45,8 @@ SOURCES += src/AldousBroderMaze.cpp \
            src/WilsonsMaze.cpp \
            ui/CellItem.cpp \
            ui/GridWindow.cpp \
+           ui/MazeMenuBar.cpp \
+           ui/MazeView.cpp \
            ui/View.cpp \
            ui/main.cpp \
            #tests/main.cpp

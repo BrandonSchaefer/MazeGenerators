@@ -22,11 +22,11 @@
 #include <QFrame>
 #include <QGraphicsView>
 #include <QGridLayout>
-#include <QMenuBar>
 #include <QSlider>
 
 #include "Maze.h"
-#include "MazeFactory.h"
+#include "MazeMenuBar.h"
+#include "MazeView.h"
 
 #include <memory>
 
@@ -42,20 +42,19 @@ public:
   View(QWidget* parent = 0);
 
   Maze::Ptr GetGeneratedMaze(int width, int height);
+  void GenerateMaze();
+  void UpdateCellSize(int cell_size);
+
+  void SetScene(QGraphicsScene* scene);
 
   View::Ptr view() const;
 
+protected:
+  void keyPressEvent(QKeyEvent* event);
+  void wheelEvent(QWheelEvent* event);
+
 private slots:
   void SetupMatrix();
-
-  void aldBrod();
-  void binTree();
-  void growTree();
-  void huntKill();
-  void prims();
-  void sideWind();
-  void recBack();
-  void wilsons();
 
 private:
   void SetupMenuBar();
@@ -63,21 +62,16 @@ private:
   void SetupGridLayout();
   void SetupSignals();
 
-  void UpdateMazeMenuTitle();
-
-  QWidget* parent_;
+  QWidget* grid_window_;
 
   std::shared_ptr<QGraphicsView> graphics_view_;
 
   std::unique_ptr<QVBoxLayout> zoom_layout_;
   std::unique_ptr<QSlider> zoom_slider_;
-  std::unique_ptr<QMenuBar> menu_bar_;
+  std::unique_ptr<MazeMenuBar> menu_bar_;
+  std::unique_ptr<MazeView> maze_view_;
 
   QGridLayout* grid_layout_;
-  QMenu* maze_menu_;
-
-  MazeFactory maze_factory_;
-  MazeType current_maze_type_;
 };
 
 } // namespace ui

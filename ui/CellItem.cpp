@@ -30,7 +30,12 @@ CellItem::CellItem(int size)
  , start_(false)
  , finish_(false)
  , marked_(false)
+ , was_marked_(false)
 {}
+
+CellItem::~CellItem()
+{
+}
 
 QRectF CellItem::boundingRect() const
 {
@@ -74,6 +79,11 @@ void CellItem::paint(QPainter* painter, QStyleOptionGraphicsItem const* item, QW
     painter->setBrush(color_);
     painter->drawEllipse(QRectF(size_/4, size_/4, size_/2, size_/2));
   }
+  else if (was_marked_)
+  {
+    painter->setBrush(Qt::gray);
+    painter->drawEllipse(QRectF(size_/4, size_/4, size_/2, size_/2));
+  }
 }
 
 Cell const& CellItem::GetCell() const
@@ -100,6 +110,7 @@ bool CellItem::Marked() const
 void CellItem::Mark()
 {
   marked_ = true;
+  was_marked_ = true;
   update();
 }
 

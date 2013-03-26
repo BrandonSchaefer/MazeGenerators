@@ -35,6 +35,7 @@ public:
   typedef std::shared_ptr<CellItem> Ptr;
 
   CellItem(int size);
+  ~CellItem();
 
   QRectF boundingRect() const;
   void paint(QPainter* painter, QStyleOptionGraphicsItem const* item, QWidget* parent);
@@ -59,6 +60,7 @@ private:
   bool start_;
   bool finish_;
   bool marked_;
+  bool was_marked_;
 };
 
 } // namespace ui

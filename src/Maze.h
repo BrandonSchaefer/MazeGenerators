@@ -24,10 +24,13 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 class Maze
 {
 public:
+  typedef std::shared_ptr<Maze> Ptr;
+
   Maze (int x, int y);
 
   Cell& Get(Point pos);
