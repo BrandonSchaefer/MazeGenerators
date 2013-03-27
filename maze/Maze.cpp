@@ -30,7 +30,7 @@ Maze::Maze (int x, int y)
   directions_ = {Cell::Direction::RIGHT, Cell::Direction::DOWN, Cell::Direction::LEFT, Cell::Direction::UP};
 }
 
-bool Maze::InBounds(Point pos) const
+bool Maze::InBounds(Point const& pos) const
 {
   int x = pos.x();
   int y = pos.y();
@@ -68,22 +68,12 @@ void Maze::SetWall(Point p, Cell::Direction dir)
   Get(p.Direction(dir)).RemoveDirection(OppositeDirection(dir));
 }
 
-bool Maze::IsStart(Point& p) const
-{
-  return p == start_;
-}
-
-bool Maze::IsFinish(Point& p) const
-{
-  return p == finish_;
-}
-
-Point Maze::GetStart()
+Point Maze::GetStart() const
 {
   return start_;
 }
 
-Point Maze::GetFinish()
+Point Maze::GetFinish() const
 {
   return finish_;
 }
@@ -108,7 +98,7 @@ bool Maze::UpOpen(Point point)
   return (InBounds(point) && Get(point).UpOpen());
 }
 
-std::vector<Cell::Direction> Maze::GetDirections()
+std::vector<Cell::Direction> Maze::GetDirections() const
 {
   return directions_;
 }
@@ -133,7 +123,7 @@ Cell::Direction Maze::GetValidRandomDirection(Point& current)
   return valid_dirs[randN];
 }
 
-Cell::Direction Maze::OppositeDirection(Cell::Direction dir)
+Cell::Direction Maze::OppositeDirection(Cell::Direction dir) const
 {
   switch (dir)
   {
@@ -165,22 +155,14 @@ void Maze::PrintMaze()
     {
       Point p(i,j);
 
-      if (IsStart(p))
+      if (start_ == p)
         cout << "\033[4;34mS\033[0m";
-      else if (IsFinish(p))
+      else if (finish_ == p)
         cout << "\033[4;31mF\033[0m";
       else if (Get(p).DownOpen() && Get(p.Down()).UpOpen())
-        if (Get(p).path)
-          cout << "\033[0;31m*\033[0m";
-        else
-          cout << " ";
+        cout << " ";
       else
-      {
-        if (Get(p).path)
-          cout << "\033[4;31m*\033[0m";
-        else
-            cout << "_";
-      }
+        cout << "_";
 
       if (Get(p).RightOpen() && Get(p.Right()).LeftOpen())
         cout << " ";

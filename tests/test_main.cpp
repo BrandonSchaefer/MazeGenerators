@@ -16,37 +16,15 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#ifndef CELL
-#define CELL
+#include <gtest.h>
+#include <stdlib.h>
 
-class Cell
+int main(int argc, char* argv[])
 {
-public:
-  Cell();
+  srand(time(NULL));
 
-  enum Direction
-  {
-    RIGHT = 1 << 0,
-    DOWN  = 1 << 1,
-    LEFT  = 1 << 2,
-    UP    = 1 << 3
-  };
+  ::testing::InitGoogleTest(&argc, argv);
+  int ret = RUN_ALL_TESTS();
 
-  void AddDirection(Direction dir);
-  void RemoveDirection(Direction dir);
-
-  bool Empty() const;
-  bool RightOpen() const;
-  bool DownOpen() const;
-  bool LeftOpen() const;
-  bool UpOpen() const;
-
-  void SetParent(Cell* cell);
-  Cell* GetParent() const;
-
-private:
-  unsigned int open_directions_;
-  Cell* parent_;
-};
-
-#endif // CELL
+  return ret;
+}

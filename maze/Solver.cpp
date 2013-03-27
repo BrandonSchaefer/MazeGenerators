@@ -42,7 +42,7 @@ vector<Point> Solver::DFSolve(Maze& maze)
   {
     current = path.back();
 
-    if (maze.IsFinish(current))
+    if (maze.GetFinish() == current)
       return path;
 
     if (maze.RightOpen(current) && !marked[current.Right().x()][current.Right().y()])
@@ -93,7 +93,7 @@ vector<Point> Solver::BFSolve(Maze& maze)
 
     current = path.back();
 
-    if (maze.IsFinish(current))
+    if (maze.GetFinish() == current)
       return path;
 
     if (maze.RightOpen(current) && !marked[current.Right().x()][current.Right().y()])

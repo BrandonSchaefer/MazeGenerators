@@ -23,9 +23,7 @@ using namespace std;
 Cell::Cell()
   : open_directions_(0)
   , parent_(nullptr)
-{
-  path = false;
-}
+{}
 
 void Cell::AddDirection(Direction dir)
 {
@@ -67,7 +65,7 @@ void Cell::SetParent(Cell* cell)
   parent_ = cell;
 }
 
-Cell* Cell::GetParent()
+Cell* Cell::GetParent() const
 {
   return parent_;
 }

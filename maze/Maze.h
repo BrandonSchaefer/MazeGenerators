@@ -41,24 +41,22 @@ public:
   void OpenPassage(Point p, Cell::Direction dir);
   void SetWall(Point p, Cell::Direction dir);
 
-  bool IsStart(Point& p) const;
-  bool IsFinish(Point& p) const;
-  Point GetStart();
-  Point GetFinish();
+  Point GetStart() const;
+  Point GetFinish() const;
 
   bool RightOpen(Point point);
   bool DownOpen(Point point);
   bool LeftOpen(Point point);
   bool UpOpen(Point point);
 
-  bool InBounds(Point pos) const;
+  bool InBounds(Point const& pos) const;
 
   void PrintMaze();
 
-  std::vector<Cell::Direction> GetDirections();
+  std::vector<Cell::Direction> GetDirections() const;
 
   Cell::Direction GetValidRandomDirection(Point& current);
-  Cell::Direction OppositeDirection(Cell::Direction dir);
+  Cell::Direction OppositeDirection(Cell::Direction dir) const;
 
   virtual void Generate() = 0;
   virtual std::string GetName() const = 0;
@@ -70,7 +68,5 @@ protected:
   Point start_;
   Point finish_;
 };
-
-Cell::Direction OppositeDirection(Cell::Direction dir);
 
 #endif // MAZE
