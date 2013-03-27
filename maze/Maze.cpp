@@ -152,7 +152,7 @@ Cell::Direction Maze::OppositeDirection(Cell::Direction dir)
 
 void Maze::PrintMaze()
 {
-  cout << "\e[H";
+  //cout << "\e[H";
 
   for (int i = 0; i < Rows(); i++)
     cout << " _";

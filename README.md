@@ -5,5 +5,5 @@ Compiling:
 
     mkdir build
     cd build
-    qmake ..
+    cmake ..
     make

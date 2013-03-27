@@ -24,7 +24,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#include "Cell.h"
+#include <Cell.h>
 
 namespace ui
 {

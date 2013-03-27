@@ -23,8 +23,9 @@ int const CELL_SIZE = 20;
 #include <QGraphicsScene>
 #include <QKeyEvent>
 
+#include <Solver.h>
+
 #include "MazeView.h"
-#include "Solver.h"
 #include "View.h"
 
 using namespace std;

@@ -20,8 +20,9 @@
 #define MAZEVIEW
 
 #include "CellItem.h"
-#include "Point.h"
-#include "MazeFactory.h"
+
+#include <Point.h>
+#include <MazeFactory.h>
 
 #include <vector>
 

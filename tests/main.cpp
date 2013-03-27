@@ -16,16 +16,16 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#include "AldousBroderMaze.h"
-#include "BinaryTreeMaze.h"
-#include "GrowingTreeMaze.h"
-#include "HuntAndKillMaze.h"
-#include "RecursiveBacktrackerMaze.h"
-#include "PrimsMaze.h"
-#include "SideWinderMaze.h"
-#include "WilsonsMaze.h"
+#include <AldousBroderMaze.h>
+#include <BinaryTreeMaze.h>
+#include <GrowingTreeMaze.h>
+#include <HuntAndKillMaze.h>
+#include <RecursiveBacktrackerMaze.h>
+#include <PrimsMaze.h>
+#include <SideWinderMaze.h>
+#include <WilsonsMaze.h>
 
-#include "Solver.h"
+#include <Solver.h>
 
 #include <assert.h>
 #include <chrono>

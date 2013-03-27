@@ -42,7 +42,7 @@ QRectF CellItem::boundingRect() const
   return QRectF(0, 0, size_, size_);
 }
 
-void CellItem::paint(QPainter* painter, QStyleOptionGraphicsItem const* item, QWidget* widget)
+void CellItem::paint(QPainter* painter, QStyleOptionGraphicsItem const* /*item*/, QWidget* widget)
 {
   Q_UNUSED(widget);
 

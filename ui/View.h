@@ -24,7 +24,8 @@
 #include <QGridLayout>
 #include <QSlider>
 
-#include "Maze.h"
+#include <Maze.h>
+
 #include "MazeMenuBar.h"
 #include "MazeView.h"
 

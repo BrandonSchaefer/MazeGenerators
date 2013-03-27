@@ -84,4 +84,6 @@ Maze::Ptr MazeFactory::GetMazeByType(MazeType maze_type, int width, int height)
     case(WILSONS):
      return std::make_shared<WilsonsMaze>(width, height);
   }
+
+  return std::make_shared<PrimsMaze>(width, height);
 }
