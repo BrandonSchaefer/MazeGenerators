@@ -41,6 +41,8 @@ public:
   void OpenPassage(Point p, Cell::Direction dir);
   void SetWall(Point p, Cell::Direction dir);
 
+  void SetStart(Point const& start);
+
   Point GetStart() const;
   Point GetFinish() const;
 

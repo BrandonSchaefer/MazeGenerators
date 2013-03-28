@@ -28,12 +28,12 @@ Solver::Solver()
 {
 }
 
-vector<Point> Solver::DFSolve(Maze& maze)
+vector<Point> Solver::DFSolve(Maze::Ptr maze)
 {
   vector<Point> path;
-  Point current = maze.GetStart();
+  Point current = maze->GetStart();
 
-  vector<vector<bool> > marked(maze.Columns(), vector<bool>(maze.Rows(), false));
+  vector<vector<bool> > marked(maze->Columns(), vector<bool>(maze->Rows(), false));
 
   path.push_back(current);
   marked[current.x()][current.y()] = true;
@@ -42,26 +42,26 @@ vector<Point> Solver::DFSolve(Maze& maze)
   {
     current = path.back();
 
-    if (maze.GetFinish() == current)
+    if (maze->GetFinish() == current)
       return path;
 
-    if (maze.RightOpen(current) && !marked[current.Right().x()][current.Right().y()])
+    if (maze->RightOpen(current) && !marked[current.Right().x()][current.Right().y()])
     {
       // Add?
       path.push_back(current.Right());
       marked[current.Right().x()][current.Right().y()] = true;
     }
-    else if (maze.DownOpen(current) && !marked[current.Down().x()][current.Down().y()])
+    else if (maze->DownOpen(current) && !marked[current.Down().x()][current.Down().y()])
     {
       path.push_back(current.Down());
       marked[current.Down().x()][current.Down().y()] = true;
     }
-    else if (maze.LeftOpen(current) && !marked[current.Left().x()][current.Left().y()])
+    else if (maze->LeftOpen(current) && !marked[current.Left().x()][current.Left().y()])
     {
       path.push_back(current.Left());
       marked[current.Left().x()][current.Left().y()] = true;
     }
-    else if (maze.UpOpen(current) && !marked[current.Up().x()][current.Up().y()])
+    else if (maze->UpOpen(current) && !marked[current.Up().x()][current.Up().y()])
     {
       path.push_back(current.Up());
       marked[current.Up().x()][current.Up().y()] = true;
@@ -75,16 +75,16 @@ vector<Point> Solver::DFSolve(Maze& maze)
   return path;
 }
 
-vector<Point> Solver::BFSolve(Maze& maze)
+vector<Point> Solver::BFSolve(Maze::Ptr maze)
 {
   queue<vector<Point> > paths;
-  Point current = maze.GetStart();
+  Point current = maze->GetStart();
   vector<Point> path;
 
   path.push_back(current);
   paths.push(path);
 
-  vector<vector<bool> > marked(maze.Columns(), vector<bool>(maze.Rows(), false));
+  vector<vector<bool> > marked(maze->Columns(), vector<bool>(maze->Rows(), false));
 
   while (!paths.empty())
   {
@@ -93,31 +93,31 @@ vector<Point> Solver::BFSolve(Maze& maze)
 
     current = path.back();
 
-    if (maze.GetFinish() == current)
+    if (maze->GetFinish() == current)
       return path;
 
-    if (maze.RightOpen(current) && !marked[current.Right().x()][current.Right().y()])
+    if (maze->RightOpen(current) && !marked[current.Right().x()][current.Right().y()])
     {
       path.push_back(current.Right());
       paths.push(path);
       path.pop_back();
       marked[current.Right().x()][current.Right().y()] = true;
     }
-    if (maze.DownOpen(current) && !marked[current.Down().x()][current.Down().y()])
+    if (maze->DownOpen(current) && !marked[current.Down().x()][current.Down().y()])
     {
       path.push_back(current.Down());
       paths.push(path);
       path.pop_back();
       marked[current.Down().x()][current.Down().y()] = true;
     }
-    if (maze.LeftOpen(current) && !marked[current.Left().x()][current.Left().y()])
+    if (maze->LeftOpen(current) && !marked[current.Left().x()][current.Left().y()])
     {
       path.push_back(current.Left());
       paths.push(path);
       path.pop_back();
       marked[current.Left().x()][current.Left().y()] = true;
     }
-    if (maze.UpOpen(current) && !marked[current.Up().x()][current.Up().y()])
+    if (maze->UpOpen(current) && !marked[current.Up().x()][current.Up().y()])
     {
       path.push_back(current.Up());
       paths.push(path);

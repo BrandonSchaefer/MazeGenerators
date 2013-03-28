@@ -33,7 +33,7 @@ void SideWinderMaze::Generate()
 
   Point up_point;
   Point current;
-  run_set.push_back(start_);
+  run_set.push_back(start_.Down());
 
   for (int j = 1; j < Rows()-2; j++)
     OpenPassage(Point(1,j), Cell::Direction::RIGHT);
@@ -54,7 +54,11 @@ void SideWinderMaze::Generate()
       }
       else
       {
-        up_point = (run_set.empty() ? current : run_set[rand() % run_set.size()]);
+        if (run_set.empty())
+          up_point = current;
+        else
+          up_point = run_set[rand() % run_set.size()];
+
         OpenPassage(up_point, Cell::Direction::UP);
         current = current.Right();
         run_set.clear();

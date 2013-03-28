@@ -16,34 +16,11 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#ifndef MAZEFACTORY
-#define MAZEFACTORY
+#include <gtest.h>
+#include "mock_maze_generation.h"
 
-#include "Maze.h"
-
-enum MazeType
+TEST_F(MockMazeGeneration, TestGrowingTreeSolvable)
 {
-  ALDOUS_BRODER,
-  BINARY_TREE,
-  GROWING_TREE,
-  HUNT_KILL,
-  PRIMS,
-  RECURSIVE_BACKTRACKER,
-  SIDE_WINDER,
-  WILSONS
-};
-
-class MazeFactory
-{
-public:
-  MazeFactory();
-
-  Maze::Ptr GenerateMaze(MazeType maze_type, int width, int height);
-  std::string GetMazeTitle(MazeType maze_type);
-
-private:
-  Maze::Ptr GetMazeByType(MazeType maze_type, int width, int height);
-
-};
-
-#endif // MAZEFACTORY
+  maze = maze_factory.GenerateMaze(GROWING_TREE, WIDTH, HEIGHT);
+  EXPECT_TRUE(SolveAllPoints());
+}

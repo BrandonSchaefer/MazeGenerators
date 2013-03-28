@@ -68,6 +68,12 @@ void Maze::SetWall(Point p, Cell::Direction dir)
   Get(p.Direction(dir)).RemoveDirection(OppositeDirection(dir));
 }
 
+void Maze::SetStart(Point const& start)
+{
+  if (InBounds(start))
+    start_ = start;
+}
+
 Point Maze::GetStart() const
 {
   return start_;

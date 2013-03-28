@@ -16,34 +16,31 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#ifndef MAZEFACTORY
-#define MAZEFACTORY
+#include <gtest.h>
+#include <Marked.h>
 
-#include "Maze.h"
+int const WIDTH = 50;
+int const HEIGHT = 45;
 
-enum MazeType
-{
-  ALDOUS_BRODER,
-  BINARY_TREE,
-  GROWING_TREE,
-  HUNT_KILL,
-  PRIMS,
-  RECURSIVE_BACKTRACKER,
-  SIDE_WINDER,
-  WILSONS
-};
+Point const CENTER(WIDTH/2, HEIGHT/2);
 
-class MazeFactory
+class MockMarked : public testing::Test
 {
 public:
-  MazeFactory();
+  MockMarked()
+    : marked(WIDTH, HEIGHT)
+  {}
 
-  Maze::Ptr GenerateMaze(MazeType maze_type, int width, int height);
-  std::string GetMazeTitle(MazeType maze_type);
-
-private:
-  Maze::Ptr GetMazeByType(MazeType maze_type, int width, int height);
-
+  Marked marked;
 };
 
-#endif // MAZEFACTORY
+TEST_F(MockMarked, TestNotMarked)
+{
+  EXPECT_FALSE(marked.IsMarked(CENTER));
+}
+
+TEST_F(MockMarked, TestMarking)
+{
+  marked.Mark(CENTER);
+  EXPECT_TRUE(marked.IsMarked(CENTER));
+}

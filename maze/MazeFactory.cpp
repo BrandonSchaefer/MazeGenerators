@@ -35,21 +35,21 @@ std::string MazeFactory::GetMazeTitle(MazeType maze_type)
   switch(maze_type)
   {
     case(ALDOUS_BRODER):
-      return "AldousBroder";
+      return "AldousBroderMaze";
     case(BINARY_TREE):
-      return "BinaryTree";
+      return "BinaryTreeMaze";
     case(GROWING_TREE):
-      return "GrowingTree";
+      return "GrowingTreeMaze";
     case(HUNT_KILL):
-      return "HuntAndKill";
+      return "HuntAndKillMaze";
     case(PRIMS):
-      return "Prims";
+      return "PrimsMaze";
     case(RECURSIVE_BACKTRACKER):
-      return "RecursiveBacktracker";
+      return "RecursiveBacktrackerMaze";
     case(SIDE_WINDER):
-      return "SideWinder";
+      return "SideWinderMaze";
     case(WILSONS):
-      return "Wilsons";
+      return "WilsonsMaze";
   }
 
   return ":) <-- Error";

@@ -28,8 +28,8 @@ class Solver
 public:
   Solver();
 
-  std::vector<Point> DFSolve(Maze& maze);
-  std::vector<Point> BFSolve(Maze& maze);
+  std::vector<Point> DFSolve(Maze::Ptr maze);
+  std::vector<Point> BFSolve(Maze::Ptr maze);
 
 private:
 

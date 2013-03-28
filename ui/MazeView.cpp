@@ -35,7 +35,7 @@ namespace ui
 
 MazeView::MazeView(QWidget* parent)
   : view_(parent)
-  , current_(Point(0,0)) 
+  , current_(Point(0,0))
   , cell_size_(CELL_SIZE)
 {}
 
@@ -69,7 +69,7 @@ void MazeView::GenerateMaze(MazeType maze_type)
   Maze::Ptr maze = maze_factory_.GenerateMaze(maze_type, w_l, h_l);
 
   Solver s;
-  solved_path_ = s.DFSolve(*maze);
+  solved_path_ = s.DFSolve(maze);
 
   for (int i = 0; i < h_l; i++)
   {
