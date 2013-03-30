@@ -1,5 +1,5 @@
 //-*- Mode: C++; indent-tabs-mode: nil; tab-width: 2 -*-
-/* * Copyright (C) 2013 Canonical Ltd
+/* * Copyright (C) 2013 Brandon Schaefer
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 3 as
@@ -13,11 +13,11 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
-* Authored by: Brandon Schaefer <brandon.schaefer@canonical.com>
+* Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-int const WIDTH = 640;
-int const HEIGHT = 480;
+int const WIDTH = 800;
+int const HEIGHT = 600;
 int const CELL_SIZE = 20;
 
 #include <QGraphicsScene>
@@ -41,7 +41,8 @@ MazeView::MazeView(QWidget* parent)
 
 QPointF MazeView::GetCenterPointFocus() const
 {
-  return QPointF((current_.y() * cell_size_) + cell_size_/2, (current_.x() * cell_size_) + cell_size_/2);
+  return QPointF((current_.y() * cell_size_) + cell_size_/2, 
+                 (current_.x() * cell_size_) + cell_size_/2);
 }
 
 QGraphicsScene* MazeView::GetViewsScene() const
