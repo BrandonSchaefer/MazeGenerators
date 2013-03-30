@@ -38,30 +38,44 @@ if (GTEST_SRC_DIR AND
        ${GMOCK_MAIN_LIB}
       )
 
-  set (GTEST_SOURCE
+  set (GTEST_MAZE_SOURCE
        test_aldous_broder.cpp
        test_binary_tree.cpp
+       test_cell.cpp
        test_growing_tree.cpp
        test_hunt_and_kill.cpp
+       test_marked.cpp
+       test_maze.cpp
+       test_maze_factory.cpp
+       test_point.cpp
        test_prims.cpp
        test_recursive_backtracker.cpp
        test_side_winder.cpp
-       test_wilsons.cpp
-       test_cell.cpp
-       test_point.cpp
-       test_marked.cpp
        test_main.cpp
-       test_maze.cpp
-       test_maze_factory.cpp
+       test_solver.cpp
+       test_wilsons.cpp
       )
 
   include_directories (${MAZE_GENERATORS_SOURCE_DIR}/maze ${GTEST_INCLUDE_DIR})
 
-  add_executable (gtest-test ${GTEST_SOURCE})
-  target_link_libraries (gtest-test maze ${GTEST_GMOCK_LIB})
-  add_test (MazeGTest gtest-test)
+  add_executable (gtest-test-maze ${GTEST_MAZE_SOURCE})
+  target_link_libraries (gtest-test-maze maze ${GTEST_GMOCK_LIB})
+  add_test (MazeGTest gtest-test-maze)
 
-  add_custom_target (check COMMAND ./gtest-test DEPENDS gtest-test)
+  set (GTEST_UI_SOURCE
+       test_main.cpp
+       test_cell_item.cpp
+      )
+
+  include_directories (${MAZE_GENERATORS_SOURCE_DIR}/ui ${MAZE_GENERATORS_SOURCE_DIR}/maze ${GTEST_INCLUDE_DIR})
+
+  add_executable (gtest-test-ui ${GTEST_UI_SOURCE})
+  qt5_use_modules (gtest-test-ui Widgets Gui PrintSupport)
+
+  target_link_libraries (gtest-test-ui maze ui ${GTEST_GMOCK_LIB})
+  add_test (UiGTest gtest-test-ui)
+
+  add_custom_target (check COMMAND ./gtest-test-maze && ./gtest-test-ui DEPENDS gtest-test-maze gtest-test-ui)
 
 endif (GTEST_SRC_DIR AND
        GMOCK_LIB AND

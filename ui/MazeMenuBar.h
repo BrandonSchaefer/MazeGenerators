@@ -27,7 +27,7 @@
 namespace ui
 {
 
-enum Difficulty 
+enum Difficulty
 {
   HARD,
   MEDIUM,

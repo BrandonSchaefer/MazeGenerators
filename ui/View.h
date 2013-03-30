@@ -20,13 +20,12 @@
 #define VIEW
 
 #include <QFrame>
-#include <QGraphicsView>
 #include <QGridLayout>
-#include <QSlider>
 
 #include <Maze.h>
 
 #include "MazeMenuBar.h"
+#include "MazeGraphicsView.h"
 #include "MazeView.h"
 
 #include <memory>
@@ -38,7 +37,7 @@ class View : public QFrame
 {
   Q_OBJECT
 public:
-  typedef std::shared_ptr<QGraphicsView> Ptr;
+  typedef std::shared_ptr<MazeGraphicsView> Ptr;
 
   View(QWidget* parent = 0);
 
@@ -47,30 +46,21 @@ public:
   void UpdateCellSize(int cell_size);
 
   void SetScene(QGraphicsScene* scene);
+  QPointF GetCenterPointFocus() const;
 
   View::Ptr view() const;
 
 protected:
   void keyPressEvent(QKeyEvent* event);
-  void wheelEvent(QWheelEvent* event);
-
-private slots:
-  void SetupMatrix();
 
 private:
   void SetupMenuBar();
-  void SetupZoomLayout();
   void SetupGridLayout();
-  void SetupSignals();
 
   QWidget* grid_window_;
-
-  std::shared_ptr<QGraphicsView> graphics_view_;
-
-  std::unique_ptr<QVBoxLayout> zoom_layout_;
-  std::unique_ptr<QSlider> zoom_slider_;
-  std::unique_ptr<MazeMenuBar> menu_bar_;
   std::unique_ptr<MazeView> maze_view_;
+  std::unique_ptr<MazeMenuBar> menu_bar_;
+  std::shared_ptr<MazeGraphicsView> graphics_view_;
 
   QGridLayout* grid_layout_;
 };

@@ -19,7 +19,6 @@
 #include "View.h"
 #include "GridWindow.h"
 
-#include <QtCore/qmath.h>
 #include <QAction>
 #include <QKeyEvent>
 
@@ -29,39 +28,19 @@ namespace ui
 View::View(QWidget* parent)
   : QFrame(parent)
   , grid_window_(parent)
-  , graphics_view_(std::make_shared<QGraphicsView>())
-  , zoom_layout_(new QVBoxLayout)
-  , zoom_slider_(new QSlider(Qt::Horizontal))
-  , menu_bar_(new MazeMenuBar(this))
   , maze_view_(new MazeView(this))
+  , menu_bar_(new MazeMenuBar(this))
+  , graphics_view_(std::make_shared<MazeGraphicsView>(this))
   , grid_layout_(new QGridLayout)
 {
-  graphics_view_->setRenderHint(QPainter::Antialiasing);
-
-  SetupZoomLayout();
   SetupGridLayout();
-  SetupSignals();
-
-  SetupMatrix();
-
   GenerateMaze();
-}
-
-void View::SetupZoomLayout()
-{  
-  zoom_layout_->addWidget(zoom_slider_.get());
-
-  zoom_slider_->setMinimum(250);
-  zoom_slider_->setMaximum(500);
-  zoom_slider_->setValue(250);
-  zoom_slider_->setTickPosition(QSlider::TicksRight);
 }
 
 void View::SetupGridLayout()
 {
   grid_layout_->addWidget(menu_bar_.get(), 0, 0);
   grid_layout_->addWidget(graphics_view_.get(), 1, 0);
-  grid_layout_->addLayout(zoom_layout_.get(), 2, 0);
   setLayout(grid_layout_);
 }
 
@@ -71,9 +50,9 @@ void View::SetScene(QGraphicsScene* scene)
   GenerateMaze();
 }
 
-void View::SetupSignals()
+QPointF View::GetCenterPointFocus() const
 {
-  connect(zoom_slider_.get(), SIGNAL(valueChanged(int)), this, SLOT(SetupMatrix()));
+  return maze_view_->GetCenterPointFocus();
 }
 
 View::Ptr View::view() const
@@ -81,21 +60,10 @@ View::Ptr View::view() const
   return graphics_view_;
 }
 
-void View::SetupMatrix()
-{
-  qreal scale = qPow(qreal(2), (zoom_slider_->value() - 250) / qreal(50));
-
-  QMatrix matrix;
-  matrix.scale(scale, scale);
-
-  graphics_view_->centerOn(maze_view_->GetCenterPointFocus());
-  graphics_view_->setMatrix(matrix);
-}
-
 void View::GenerateMaze()
 {
   maze_view_->GenerateMaze(menu_bar_->GetMazeType());
-  SetupMatrix();
+  graphics_view_->SetupMatrix();
 }
 
 void View::UpdateCellSize(int cell_size)
@@ -120,16 +88,6 @@ void View::keyPressEvent(QKeyEvent* event)
 
   if (maze_view_->HandleKeyEvent(event))
     graphics_view_->centerOn(maze_view_->GetCenterPointFocus());
-}
-
-void View::wheelEvent(QWheelEvent* event)
-{
-  if (event->delta() > 0)
-    zoom_slider_->setValue(zoom_slider_->value() + 10);
-  else
-    zoom_slider_->setValue(zoom_slider_->value() - 10);
-
-  SetupMatrix();
 }
 
 } // namespace ui
