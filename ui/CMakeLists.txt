@@ -15,7 +15,8 @@ pkg_check_modules (CACHED_UI_REQUIRES ${UI_REQUIRES})
 set (UI_SOURCE
      CellItem.cpp
      GridWindow.cpp
-     MazeMenuBar.cpp
+     MazeButtonBar.cpp
+     MazeMenuView.cpp
      MazeGraphicsView.cpp
      MazeView.cpp
      View.cpp
@@ -24,7 +25,8 @@ set (UI_SOURCE
 set (UI_HEADERS
      CellItem.h
      GridWindow.h
-     MazeMenuBar.h
+     MazeButtonBar.h
+     MazeMenuView.h
      MazeGraphicsView.h
      MazeView.h
     )

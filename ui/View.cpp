@@ -1,5 +1,5 @@
 //-*- Mode: C++; indent-tabs-mode: nil; tab-width: 2 -*-
-/* * Copyright (C) 2013 Brandon Schaefer 
+/* * Copyright (C) 2013 Brandon Schaefer
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 3 as
@@ -22,25 +22,30 @@
 #include <QAction>
 #include <QKeyEvent>
 
+#include <QComboBox>
+
 namespace ui
 {
 
 View::View(QWidget* parent)
   : QFrame(parent)
-  , grid_window_(parent)
   , maze_view_(new MazeView(this))
-  , menu_bar_(new MazeMenuBar(this))
+  , menu_view_(new MazeMenuView(this))
+  , button_bar_(new MazeButtonBar(this))
   , graphics_view_(std::make_shared<MazeGraphicsView>(this))
   , grid_layout_(new QGridLayout)
 {
   SetupGridLayout();
   GenerateMaze();
+
+  setFocus();
 }
 
 void View::SetupGridLayout()
 {
-  grid_layout_->addWidget(menu_bar_.get(), 0, 0);
+  grid_layout_->addLayout(menu_view_.get(), 0, 0);
   grid_layout_->addWidget(graphics_view_.get(), 1, 0);
+  grid_layout_->addLayout(button_bar_.get(), 2, 0);
   setLayout(grid_layout_);
 }
 
@@ -62,8 +67,13 @@ View::Ptr View::view() const
 
 void View::GenerateMaze()
 {
-  maze_view_->GenerateMaze(menu_bar_->GetMazeType());
+  maze_view_->GenerateMaze(menu_view_->GetMazeType());
   graphics_view_->SetupMatrix();
+}
+
+void View::SolvedMaze()
+{
+  maze_view_->MarkSolvedMaze();
 }
 
 void View::UpdateCellSize(int cell_size)

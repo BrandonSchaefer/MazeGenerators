@@ -16,12 +16,13 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-int const WIDTH = 800;
-int const HEIGHT = 600;
+int const WIDTH = 640;
+int const HEIGHT = 480;
 int const CELL_SIZE = 20;
 
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QTimer>
 
 #include <Solver.h>
 
@@ -34,10 +35,14 @@ namespace ui
 {
 
 MazeView::MazeView(QWidget* parent)
-  : view_(parent)
+  : QWidget(parent)
   , current_(Point(0,0))
   , cell_size_(CELL_SIZE)
-{}
+  , solved_index_(0)
+  , solved_timer_(new QTimer(parent))
+{
+  connect(solved_timer_, SIGNAL(timeout()), this, SLOT(updateSolvedPath()));
+}
 
 QPointF MazeView::GetCenterPointFocus() const
 {
@@ -47,7 +52,7 @@ QPointF MazeView::GetCenterPointFocus() const
 
 QGraphicsScene* MazeView::GetViewsScene() const
 {
-  return static_cast<View*>(view_)->view()->scene();
+  return static_cast<View*>(parentWidget())->view()->scene();
 }
 
 void MazeView::SetCellSize(int cell_size)
@@ -58,6 +63,12 @@ void MazeView::SetCellSize(int cell_size)
 void MazeView::GenerateMaze(MazeType maze_type)
 {
   QGraphicsScene* scene_ = GetViewsScene();
+
+  if (solved_timer_->isActive())
+  {
+    solved_index_ = 0;
+    solved_timer_->stop();
+  }
 
   if (!scene_)
     return;
@@ -99,11 +110,19 @@ void MazeView::GenerateMaze(MazeType maze_type)
 
 void MazeView::MarkSolvedMaze()
 {
-  for (auto p : solved_path_)
-  {
-    cell_views_[p.y()-1][p.x()-1]->Mark();
-    cell_views_[p.y()-1][p.x()-1]->SetColor(Qt::red);
-  }
+  solved_index_ = 0;
+  solved_timer_->start(25);
+}
+
+void MazeView::updateSolvedPath()
+{
+  if (solved_index_ >= solved_path_.size()-1)
+    solved_timer_->stop();
+
+  Point p = solved_path_[solved_index_];
+  cell_views_[p.y()-1][p.x()-1]->Mark();
+  cell_views_[p.y()-1][p.x()-1]->SetColor(Qt::red);
+  solved_index_++;
 }
 
 bool MazeView::HandleKeyEvent(QKeyEvent* event)

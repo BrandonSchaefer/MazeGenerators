@@ -1,5 +1,5 @@
 //-*- Mode: C++; indent-tabs-mode: nil; tab-width: 2 -*-
-/* * Copyright (C) 2013 Brandon Schaefer
+/* * Copyright (C) 2013 Brandon Schaefer 
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 3 as
@@ -16,52 +16,57 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#ifndef MAZEVIEW
-#define MAZEVIEW
-
+#include <QComboBox>
+#include <QHBoxLayout>
 #include <QWidget>
 
-#include "CellItem.h"
+#include "MazeFactory.h"
 
-#include <Point.h>
-#include <MazeFactory.h>
-
-#include <vector>
+#ifndef MAZEMENUBAR
+#define MAZEMENUBAR
 
 namespace ui
 {
 
-class MazeView : public QWidget
+enum Difficulty
+{
+  EASY,
+  MEDIUM,
+  HARD
+};
+
+class MazeComboBox : public QComboBox
+{
+public:
+  MazeComboBox(QWidget* parent = 0);
+
+  void hidePopup();
+};
+
+class MazeMenuView : public QHBoxLayout
 {
   Q_OBJECT
 public:
-  MazeView(QWidget* parent = 0);
+  MazeMenuView(QWidget* parent = 0);
 
-  void GenerateMaze(MazeType maze);
-  void SetCellSize(int cell_size);
-  void MarkSolvedMaze();
-
-  bool HandleKeyEvent(QKeyEvent* event);
-  QPointF GetCenterPointFocus() const;
+  MazeType GetMazeType() const;
 
 private slots:
-  void updateSolvedPath();
+  void MazeMenuActivated(int index);
+  void DifficultyMenuActivated(int index);
 
 private:
-  QGraphicsScene* GetViewsScene() const;
+  void UpdateMazeMenuTitle();
+  void UpdateDifficultyMenuTitle();
 
-  Point current_;
-  Point finish_;
-  int cell_size_;
-  unsigned int solved_index_;
-
-  std::vector<std::vector<CellItem::Ptr> > cell_views_;
-  std::vector<Point> solved_path_;
-  QTimer* solved_timer_;
+  std::unique_ptr<MazeComboBox> maze_menu_;
+  std::unique_ptr<MazeComboBox> diff_menu_;
 
   MazeFactory maze_factory_;
+  MazeType current_maze_type_;
+  Difficulty current_diff_;
 };
 
 } // namespace ui
 
-#endif // MAZEVIEW
+#endif // MAZEMENUBAR

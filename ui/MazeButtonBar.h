@@ -1,5 +1,5 @@
 //-*- Mode: C++; indent-tabs-mode: nil; tab-width: 2 -*-
-/* * Copyright (C) 2013 Brandon Schaefer 
+/* * Copyright (C) 2013 Brandon Schaefer
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License version 3 as
@@ -16,60 +16,33 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#include <QMenuBar>
-#include <QWidget>
+#ifndef MAZEBUTTONBAR
+#define MAZEBUTTONBAR
 
-#include "MazeFactory.h"
+#include <QHBoxLayout>
+#include <QPushButton>
 
-#ifndef MAZEMENUBAR
-#define MAZEMENUBAR
+#include <memory>
 
 namespace ui
 {
 
-enum Difficulty
-{
-  HARD,
-  MEDIUM,
-  EASY
-};
-
-class MazeMenuBar : public QMenuBar
+class MazeButtonBar : public QHBoxLayout
 {
   Q_OBJECT
 public:
-  MazeMenuBar(QWidget* parent = 0);
-
-  MazeType GetMazeType() const;
+  MazeButtonBar(QWidget* parent = 0);
 
 private slots:
-  void aldBrod();
-  void binTree();
-  void growTree();
-  void huntKill();
-  void prims();
-  void sideWind();
-  void recBack();
-  void wilsons();
-
-  void hard();
-  void medium();
-  void easy();
+  void GenerateClicked();
+  void SolveClicked();
 
 private:
-  void UpdateMazeMenuTitle();
-  void UpdateDifficultyMenuTitle();
+  std::unique_ptr<QPushButton> generate_button_;
+  std::unique_ptr<QPushButton> solve_button_;
 
-  QWidget* view_;
-
-  std::unique_ptr<QMenu> maze_menu_;
-  std::unique_ptr<QMenu> diff_menu_;
-
-  MazeFactory maze_factory_;
-  MazeType current_maze_type_;
-  Difficulty current_diff_;
 };
 
 } // namespace ui
 
-#endif // MAZEMENUBAR
+#endif // MAZEBUTTONBAR

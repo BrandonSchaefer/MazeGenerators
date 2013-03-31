@@ -32,7 +32,6 @@ int const ZOOM = 10;
 
 MazeGraphicsView::MazeGraphicsView(QWidget* parent)
   : QGraphicsView(parent)
-  , view_(parent)
   , zoom_value_(MIN_ZOOM)
 {
   setRenderHint(QPainter::Antialiasing);
@@ -51,7 +50,7 @@ void MazeGraphicsView::SetupMatrix()
   QMatrix matrix;
   matrix.scale(scale, scale);
 
-  centerOn(static_cast<View*>(view_)->GetCenterPointFocus());
+  centerOn(static_cast<View*>(parentWidget())->GetCenterPointFocus());
   setMatrix(matrix);
 }
 

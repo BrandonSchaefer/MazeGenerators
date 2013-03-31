@@ -24,7 +24,8 @@
 
 #include <Maze.h>
 
-#include "MazeMenuBar.h"
+#include "MazeButtonBar.h"
+#include "MazeMenuView.h"
 #include "MazeGraphicsView.h"
 #include "MazeView.h"
 
@@ -43,6 +44,8 @@ public:
 
   Maze::Ptr GetGeneratedMaze(int width, int height);
   void GenerateMaze();
+  void SolvedMaze();
+
   void UpdateCellSize(int cell_size);
 
   void SetScene(QGraphicsScene* scene);
@@ -57,9 +60,9 @@ private:
   void SetupMenuBar();
   void SetupGridLayout();
 
-  QWidget* grid_window_;
   std::unique_ptr<MazeView> maze_view_;
-  std::unique_ptr<MazeMenuBar> menu_bar_;
+  std::unique_ptr<MazeMenuView> menu_view_;
+  std::unique_ptr<MazeButtonBar> button_bar_;
   std::shared_ptr<MazeGraphicsView> graphics_view_;
 
   QGridLayout* grid_layout_;

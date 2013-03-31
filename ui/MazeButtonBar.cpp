@@ -16,31 +16,32 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#ifndef MAZEGRAPHICSVIEW
-#define MAZEGRAPHICSVIEW
-
-#include <QGraphicsView>
+#include "MazeButtonBar.h"
+#include "View.h"
 
 namespace ui
 {
 
-class MazeGraphicsView : public QGraphicsView
+MazeButtonBar::MazeButtonBar(QWidget* parent)
+  : QHBoxLayout()
+  , generate_button_(new QPushButton("Generate", parent))
+  , solve_button_(new QPushButton("Solve", parent))
 {
-public:
-  MazeGraphicsView(QWidget* parent = 0);
+  connect(generate_button_.get(), SIGNAL(clicked()), this, SLOT(GenerateClicked()));
+  connect(solve_button_.get(), SIGNAL(clicked()), this, SLOT(SolveClicked()));
 
-  void SetupMatrix();
+  addWidget(generate_button_.get());
+  addWidget(solve_button_.get());
+}
 
-protected:
-  void wheelEvent(QWheelEvent* event);
+void MazeButtonBar::GenerateClicked()
+{
+  static_cast<View*>(parentWidget())->GenerateMaze();
+}
 
-private:
-  void ZoomIn();
-  void ZoomOut();
-
-  int zoom_value_;
-};
+void MazeButtonBar::SolveClicked()
+{
+  static_cast<View*>(parentWidget())->SolvedMaze();
+}
 
 } // namespace ui
-
-#endif // MAZEGRAPHICSVIEW
