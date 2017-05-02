@@ -17,7 +17,7 @@
 */
 
 #include <Point.h>
-#include <gtest.h>
+#include <gtest/gtest.h>
 
 int const X = 5;
 int const Y = 4;

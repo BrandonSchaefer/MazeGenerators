@@ -16,7 +16,7 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#include <gtest.h>
+#include <gtest/gtest.h>
 #include <Marked.h>
 
 int const WIDTH = 50;

@@ -17,7 +17,7 @@
 */
 
 #include <CellItem.h>
-#include <gtest.h>
+#include <gtest/gtest.h>
 
 using namespace ui;
 

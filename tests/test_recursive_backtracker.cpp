@@ -16,7 +16,7 @@
 * Authored by: Brandon Schaefer <brandontschaefer@gmail.com>
 */
 
-#include <gtest.h>
+#include <gtest/gtest.h>
 #include "mock_maze_generation.h"
 
 TEST_F(MockMazeGeneration, TestRecursiveBacktrackerSolvable)

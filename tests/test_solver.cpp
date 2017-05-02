@@ -18,7 +18,7 @@
 
 #include <MazeFactory.h>
 #include <Solver.h>
-#include <gtest.h>
+#include <gtest/gtest.h>
 
 int const WIDTH = 20;
 int const HEIGTH = 30;
